@@ -44,6 +44,7 @@ actions = {
     },
     'reset_grafana_admin_password': {
         'command': f'grafana-cli admin reset-admin-password {node.metadata.get("grafana").get("admin_password")}',
+        'interactive': False,  # Skip confirmation in interactive mode
         'needs': [
             'svc_systemd:grafana-server',
         ],
