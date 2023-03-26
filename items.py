@@ -1,6 +1,5 @@
-import os
-
 global node
+config = node.metadata.get('grafana')
 
 files = {
     "/etc/apt/sources.list.d/grafana.list": {
@@ -13,8 +12,11 @@ files = {
         'source': 'etc/grafana/grafana.ini.jinja2',
         'content_type': 'jinja2',
         'context': {
-            'http': node.metadata.get('grafana').get('http'),
-            'database': node.metadata.get('grafana').get('database'),
+            'admin_username': config.get('admin_username'),
+            'admin_password': config.get('admin_password'),
+            'admin_email': config.get('admin_email'),
+            'http': config.get('http'),
+            'database': config.get('database'),
         },
         'owner': 'grafana',
         'group': 'grafana',
@@ -40,13 +42,6 @@ actions = {
         ],
         'triggers': [
             'action:force_update_apt_cache',
-        ],
-    },
-    'reset_grafana_admin_password': {
-        'command': f'grafana-cli admin reset-admin-password {node.metadata.get("grafana").get("admin_password")}',
-        'interactive': False,  # Skip confirmation in interactive mode
-        'needs': [
-            'svc_systemd:grafana-server',
         ],
     },
 }

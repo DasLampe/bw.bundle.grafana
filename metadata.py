@@ -3,7 +3,9 @@ global node
 
 defaults = {
     'grafana': {
+        'admin_username': 'admin',
         'admin_password': repo.vault.password_for("grafana_admin_{}".format(node.name)),
+        'admin_email': 'admin@localhost',
         'create_database': True,
         'database':  {
             'host': '127.0.0.1',
