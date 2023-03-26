@@ -98,7 +98,7 @@ http_port = {{ http.get('port') }}
 
 # Either "mysql", "postgres" or "sqlite3", it's your choice
 type = postgres
-host = 127.0.0.1:5432
+host = {{ database.get('host') }}:{{ database.get('port') }}
 name = {{ database.get('name') }}
 user = {{ database.get('user') }}
 # If the password contains # or ; you have to wrap it with triple quotes. Ex """#password;"""
