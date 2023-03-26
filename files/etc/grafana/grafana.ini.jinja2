@@ -41,7 +41,7 @@ http_addr = {{ http.get('addr') }}
 http_port = {{ http.get('port') }}
 
 # The public facing domain name used to access grafana from a browser
-;domain = localhost
+domain = {{ http.get('domain') }}
 
 # Redirect to correct domain if host header does not match domain
 # Prevents DNS rebinding attacks
@@ -49,7 +49,7 @@ http_port = {{ http.get('port') }}
 
 # The full public facing url you use in browser, used for redirects and emails
 # If you use reverse proxy and sub path specify full url (with sub path)
-;root_url = %(protocol)s://%(domain)s:%(http_port)s/
+root_url = {{ http.get('root_url') }}
 
 # Serve Grafana from subpath specified in `root_url` setting. By default it is set to `false` for compatibility reasons.
 ;serve_from_sub_path = false
@@ -290,7 +290,7 @@ admin_password = {{ admin_password }}
 admin_email = {{ admin_email }}
 
 # used for signing
-;secret_key = SW2YcwTIb9zpOOhoPsMm
+secret_key = {{ secret_key }}
 
 # current key provider used for envelope encryption, default to static value specified by secret_key
 ;encryption_provider = secretKey.v1
@@ -524,21 +524,21 @@ admin_email = {{ admin_email }}
 
 #################################### GitHub Auth ##########################
 [auth.github]
-;enabled = false
-;allow_sign_up = true
-;auto_login = false
-;client_id = some_id
-;client_secret = some_secret
-;scopes = user:email,read:org
-;auth_url = https://github.com/login/oauth/authorize
-;token_url = https://github.com/login/oauth/access_token
-;api_url = https://api.github.com/user
-;allowed_domains =
-;team_ids =
-;allowed_organizations =
-;role_attribute_path =
-;role_attribute_strict = false
-;allow_assign_grafana_admin = false
+enabled = {{ auth_github.get('enabled') }}
+allow_sign_up = {{ auth_github.get('allow_sign_up') }}
+auto_login = {{ auth_github.get('auto_login') }}
+client_id = {{ auth_github.get('client_id') }}
+client_secret = {{ auth_github.get('client_secret') }}
+scopes = {{ auth_github.get('scopes') | join(',') }}
+auth_url = {{ auth_github.get('auth_url') }}
+token_url = {{ auth_github.get('token_url') }}
+api_url = {{ auth_github.get('api_url') }}
+allowed_domains = {{ auth_github.get('allowed_domains') | join(' ') }}
+team_ids = {{ auth_github.get('team_ids') | join(',') }}
+allowed_organizations = {{ auth_github.get('allowed_organizations') | join(' ') }}
+role_attribute_path = {{ auth_github.get('role_attribute_path') }}
+role_attribute_strict = {{ auth_github.get('role_attribute_strict') }}
+allow_assign_grafana_admin = {{ auth_github.get('allow_assign_grafana_admin') }}
 
 #################################### GitLab Auth #########################
 [auth.gitlab]
