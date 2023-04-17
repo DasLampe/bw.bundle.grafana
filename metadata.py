@@ -58,13 +58,13 @@ def add_postgresql_integration(metadata):
     if not node.has_bundle("postgres"):
         raise DoNotRunAgain
 
-    if metadata.get('prometheus').get('create_database'):
+    if metadata.get('grafana').get('create_database'):
         return {
             'postgres': {
                 'databases': {
-                    metadata.get('prometheus').get('database').get('name'): {
-                        'owner_name': metadata.get('prometheus').get('database').get('user'),
-                        'owner_password': metadata.get('prometheus').get('database').get('password'),
+                    metadata.get('grafana').get('database').get('name'): {
+                        'owner_name': metadata.get('grafana').get('database').get('user'),
+                        'owner_password': metadata.get('grafana').get('database').get('password'),
                     },
                 },
             }
