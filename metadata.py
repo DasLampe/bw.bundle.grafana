@@ -1,5 +1,4 @@
-global repo
-global node
+global repo, node, metadata_reactor, DoNotRunAgain
 
 defaults = {
     'grafana': {
