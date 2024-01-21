@@ -40,7 +40,9 @@ actions = {
             '.pre'
         ],
         'needs': [
-            'file:/etc/apt/sources.list.d/grafana.list'
+            'file:/etc/apt/sources.list.d/grafana.list',
+            'pkg_apt:gpg',
+            'pkg_apt:curl',
         ],
         'triggers': [
             'action:force_update_apt_cache',

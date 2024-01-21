@@ -48,6 +48,12 @@ defaults = {
             'software-properties-common': {
                 'installed': True,
             },
+            'gpg': {
+                'installed': True,
+            },
+            'curl': {
+                'installed': True,
+            }
         },
     },
 }
